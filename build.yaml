@@ -1,0 +1,11 @@
+gems:
+
+repositories:
+  remote:
+    - http://repo1.maven.org/maven2
+
+artifacts:
+  # -- test dependencies
+  junit: junit:junit:jar:4.12
+  hamcrest: org.hamcrest:java-hamcrest:jar:2.0.0.0
+  hamcrest_junit: org.hamcrest:hamcrest-junit:jar:2.0.0.0

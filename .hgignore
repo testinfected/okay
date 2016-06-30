@@ -1,0 +1,11 @@
+syntax: glob
+
+*.iws
+*.ipr
+*.iml
+.DS_Store
+target
+build
+reports
+.idea
+.gradle
