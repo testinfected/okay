@@ -22,7 +22,8 @@ group = 'com.vtence.okay'
 version = '0.1-SNAPSHOT'
 
 def libs = [
-        hamcrest         : ['org.hamcrest:hamcrest-junit:2.0.0.0@jar', 'org.hamcrest:java-hamcrest:2.0.0.0'],
+        hamcrest         : 'org.hamcrest:java-hamcrest:2.0.0.0',
+        hamcrest_junit   : 'org.hamcrest:hamcrest-junit:2.0.0.0@jar',
         junit            : 'junit:junit:4.12@jar'
 ]
 
@@ -30,9 +31,15 @@ repositories {
     mavenCentral()
 }
 
+def optionalDeps = []
+ext {
+    optional = { optionalDeps << it; it }
+}
+
 dependencies {
-    testCompile libs.hamcrest
+    compile libs.hamcrest, optional
     testCompile libs.junit
+    testCompile libs.hamcrest_junit
 }
 
 task 'version' << {
@@ -71,6 +78,10 @@ modifyPom {
                 id 'testinfected'
                 name 'Vincent Tencé'
             }
+        }
+
+        optionalDeps.each { dep ->
+            dependencies.find { it.artifactId == dep.name }.scope = 'optional'
         }
 
         // no need to publish test dependencies
